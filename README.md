@@ -1,64 +1,51 @@
-# grok3-api-free 接入指南：基于 Docker 的实现
+# Grok API 服务
 
 ## 项目简介
-本项目提供了一种简单、高效的方式通过 Docker 部署 Grok API 服务，使用 OpenAI 的格式转换调用 grok 官网，进行 API 处理。
+本项目提供了一个基于 Python 的 Grok API 服务，使用 OpenAI 的格式转换调用 grok 官网进行 API 处理。
 
-## 方法一：Docker部署
+## 快速开始
 
-### 1. 获取项目
-克隆仓库：[grok3-api-free](https://github.com/sanshao85/grok3-api-free)
-
-### 2. 部署选项
-
-#### 方式A：使用脚本快速部署
-下载 `run_grok_api.sh` 脚本，赋予执行权限并运行：
+### 1. 安装依赖
 ```bash
-chmod +x run_grok_api.sh
-sudo ./run_grok_api.sh
+pip install -r requirements.txt
 ```
-脚本提供了交互式菜单，包括 Docker 安装、容器管理和服务检测等功能。
 
-#### 方式B：直接使用Docker命令
+### 2. 配置环境变量
+创建 `.env` 文件并配置以下环境变量：
+
+```env
+# 服务器配置
+PORT=3000
+
+# API 配置
+API_KEY=sk-123456789
+
+# 会话配置
+IS_TEMP_CONVERSATION=false
+IS_TEMP_GROK2=true
+GROK2_CONCURRENCY_LEVEL=2
+
+# 图床配置
+TUMY_KEY=your_tumy_key  # 和 PICGO_KEY 二选一
+# PICGO_KEY=your_picgo_key
+
+# SSO 配置
+IS_CUSTOM_SSO=false
+
+# 显示配置
+ISSHOW_SEARCH_RESULTS=false
+SHOW_THINKING=true
+
+# SSO 令牌配置 (多个令牌用英文逗号分隔)
+SSO=your_sso_token1,your_sso_token2,your_sso_token3
+```
+
+### 3. 启动服务
 ```bash
-docker run -it -d --name grok3-api-free \
-  -p 3000:3000 \
-  -e IS_TEMP_CONVERSATION=false \
-  -e IS_TEMP_GROK2=true \
-  -e GROK2_CONCURRENCY_LEVEL=2 \
-  -e API_KEY=sk-123456789 \
-  -e TUMY_KEY=your_tumy_key \
-  -e IS_CUSTOM_SSO=false \
-  -e ISSHOW_SEARCH_RESULTS=false \
-  -e PORT=3000 \
-  -e SHOW_THINKING=true \
-  -e SSO=your_sso_token \
-  sanshao85/grok3-api-free:latest
+python app.py
 ```
 
-#### 方式C：使用Docker Compose
-```yaml
-version: '3.8'
-services:
-  grok3-api-free:
-    image: sanshao85/grok3-api-free:latest
-    container_name: grok3-api-free
-    ports:
-      - "3000:3000"
-    environment:
-      - IS_TEMP_CONVERSATION=false
-      - IS_TEMP_GROK2=true
-      - GROK2_CONCURRENCY_LEVEL=2
-      - API_KEY=sk-123456789
-      - TUMY_KEY=your_tumy_key
-      - IS_CUSTOM_SSO=false
-      - ISSHOW_SEARCH_RESULTS=false
-      - PORT=3000
-      - SHOW_THINKING=true
-      - SSO=your_sso_token
-    restart: unless-stopped
-```
-
-### 3. 环境变量配置
+## 环境变量说明
 
 |变量 | 说明 | 构建时是否必填 |示例|
 |--- | --- | ---| ---|
