@@ -63,34 +63,37 @@ python app.py
 |`SHOW_THINKING` | 是否显示思考模型的思考过程 | （可不填，默认为true） | `true/false`|
 
 ## 功能特点
-实现的功能：
 
-已支持文字生成图，使用grok-2-imageGen和grok-3-imageGen模型。
-已支持全部模型识图和传图，只会识别存储用户消息最新的一个图，历史记录图全部为占位符替代。
-已支持搜索功能，使用grok-2-search或者grok-3-search模型，可以选择是否关闭搜索结果
-已支持深度搜索功能，使用grok-3-deepsearch，深度搜索支持think过程显示
-已支持推理模型功能，使用grok-3-reasoning
-已支持真流式，上面全部功能都可以在流式情况调用
-支持多账号轮询，在环境变量中配置
-可以选择是否移除思考模型的思考过程。
-支持自行设置轮询和负载均衡，而不依靠项目代码
-自动过CF屏蔽盾
-可自定义http和Socks5代理
-已转换为openai格式。
-可用模型列表
-grok-2
-grok-2-imageGen
-grok-2-search
-grok-3
-grok-3-search
-grok-3-imageGen
-grok-3-deepsearch
-grok-3-reasoning
-模型可用次数参考
-grok-2,grok-2-imageGen,grok-2-search 合计：30次 每1小时刷新
-grok-3,grok-3-search,grok-3-imageGen 合计：20次 每2小时刷新
-grok-3-deepsearch：10次 每24小时刷新
-grok-3-reasoning：10次 每24小时刷新
+### 主要功能
+- 支持文字生成图像（使用 grok-2-imageGen 和 grok-3-imageGen 模型）
+- 支持全部模型识图和传图（仅识别用户最新消息中的图片，历史记录使用占位符替代）
+- 支持搜索功能（使用 grok-2-search 或 grok-3-search 模型，可配置是否显示搜索结果）
+- 支持深度搜索功能（使用 grok-3-deepsearch，支持显示思考过程）
+- 支持推理模型功能（使用 grok-3-reasoning）
+- 支持真实流式响应（所有功能均支持流式调用）
+- 支持多账号轮询（通过环境变量配置）
+- 支持自定义轮询和负载均衡
+- 自动绕过 CF 屏蔽
+- 支持自定义 HTTP 和 Socks5 代理
+- 已转换为 OpenAI 格式接口
+
+### 可用模型列表
+- grok-2
+- grok-2-imageGen
+- grok-2-search
+- grok-3
+- grok-3-search
+- grok-3-imageGen
+- grok-3-deepsearch
+- grok-3-reasoning
+
+### 模型使用限制
+| 模型组 | 可用次数 | 刷新周期 |
+|--------|----------|----------|
+| grok-2, grok-2-imageGen, grok-2-search | 合计 30 次 | 每 1 小时刷新 |
+| grok-3, grok-3-search, grok-3-imageGen | 合计 20 次 | 每 2 小时刷新 |
+| grok-3-deepsearch | 10 次 | 每 24 小时刷新 |
+| grok-3-reasoning | 10 次 | 每 24 小时刷新 |
 
 ### cookie的获取办法：
 1. 打开[grok官网](https://grok.com/)
